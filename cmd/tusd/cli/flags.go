@@ -28,6 +28,8 @@ var Flags struct {
 	S3DisableContentHashes  bool
 	GCSBucket               string
 	GCSObjectPrefix         string
+	AliYunBucket            string
+	AliYunObjectPrefix      string
 	EnabledHooksString      string
 	FileHooksDir            string
 	HttpHooksEndpoint       string

@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/tus/tusd/pkg/aliyunstore"
 	"github.com/tus/tusd/pkg/filelocker"
 	"github.com/tus/tusd/pkg/filestore"
 	"github.com/tus/tusd/pkg/gcsstore"
@@ -84,6 +85,17 @@ func CreateComposer() {
 		store.ObjectPrefix = Flags.GCSObjectPrefix
 		store.UseIn(Composer)
 
+		locker := memorylocker.New()
+		locker.UseIn(Composer)
+	} else if Flags.AliYunBucket != "" {
+		// aliyunServiceConfig := os.Getenv("ALIYUN_SERVICE_CONFIG")
+		aliYunClientManager, err := aliyunstore.NewAliYunClientManager()
+		if err != nil {
+			stderr.Fatalf("Unable to create AliYun OSS Service: %s\n", err)
+		}
+		store := aliyunstore.New(Flags.AliYunBucket, aliYunClientManager)
+		store.ObjectPrefix = Flags.AliYunObjectPrefix
+		store.UseIn(Composer)
 		locker := memorylocker.New()
 		locker.UseIn(Composer)
 	} else {

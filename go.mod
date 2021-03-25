@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	cloud.google.com/go v0.40.0
+	github.com/aliyun/aliyun-oss-go-sdk v2.1.6+incompatible // indirect
 	github.com/aws/aws-sdk-go v1.20.1
 	github.com/bmizerany/pat v0.0.0-20170815010413-6226ea591a40
 	github.com/golang/mock v1.3.1
